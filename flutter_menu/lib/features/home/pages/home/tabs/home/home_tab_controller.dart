@@ -1,0 +1,15 @@
+import 'package:flutter_menu/features/home/models/home_section.dart';
+import 'package:flutter_menu/features/home/repositories/home_repository.dart';
+import 'package:get/get.dart';
+
+class HomeTabController extends GetxController {
+
+  final HomeRepository homeRepository = Get.find();
+
+  final Rxn<List<HomeSection>> sections = Rxn<List<HomeSection>>();
+
+  Future<void> loadSections() async {
+    sections.value = await homeRepository.getHomeSections();
+  }
+
+}
