@@ -15,7 +15,7 @@ class StrapiDatasourceImpl implements StrapiDatasource {
     final response = await _dio.get(
       '/products',
       queryParameters: {
-        'populate': 'deep',
+        'populate': 'deep,6',
         if (categoryId != null) 'filters[category][id][\$eq]': categoryId,
       },
     );
@@ -29,7 +29,7 @@ class StrapiDatasourceImpl implements StrapiDatasource {
   Future<Either<GetProductError, Product>> getProduct(int id) async {
     try {
       final response = await _dio
-          .get('/products/$id', queryParameters: {'populate': 'deep'});
+          .get('/products/$id', queryParameters: {'populate': 'deep,6'});
       return Right(Product.fromJson(response.data['data'])!);
     } on DioError catch (e) {
       if (e.response?.statusCode == 404) {
@@ -47,7 +47,7 @@ class StrapiDatasourceImpl implements StrapiDatasource {
     final response = await _dio.get(
       '/home',
       queryParameters: {
-        'populate': 'deep,6',
+        'populate': 'deep,7',
       },
     );
     return List<HomeSection>.from(response.data['data']['attributes']
@@ -62,7 +62,7 @@ class StrapiDatasourceImpl implements StrapiDatasource {
     final response = await _dio.get(
       '/menu',
       queryParameters: {
-        'populate': 'deep,6',
+        'populate': 'deep,7',
       },
     );
     return List<HomeSection>.from(response.data['data']['attributes']
@@ -86,8 +86,8 @@ class StrapiDatasourceImpl implements StrapiDatasource {
     final response = await _dio.get(
       '/orders',
       queryParameters: {
-        if(status != null) 'filters[status][\$eq]': status.name,
-        'populate': 'deep',
+        if (status != null) 'filters[status][\$eq]': status.name,
+        'populate': 'deep,6',
         'sort': 'createdAt:asc'
       },
     );
@@ -97,7 +97,9 @@ class StrapiDatasourceImpl implements StrapiDatasource {
 
   @override
   Future<void> setOrderStatus(int orderId, OrderStatus status) async {
-    await _dio.put('/orders/$orderId', data: {'data': {'status': status.name}});
+    await _dio.put('/orders/$orderId', data: {
+      'data': {'status': status.name}
+    });
   }
 }
 

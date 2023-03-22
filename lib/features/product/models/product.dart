@@ -32,7 +32,7 @@ class Product extends Equatable {
             .where((m) => m != null)
             .toList()),
       );
-    } catch (e, s) {
+    } catch (e) {
       //debugPrint('$e $s');
       return null;
     }

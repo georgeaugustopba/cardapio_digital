@@ -23,7 +23,7 @@ void main() {
 
   group('testes de cenários de sucesso', () {
     const order = CreateOrderModel(
-      table: '1',
+      //   table: '1',
       products: [],
       userPhone: '123',
       userName: '123',
@@ -44,10 +44,11 @@ void main() {
   });
 
   group('testes de cenários de erro', () {
-    test('deve retornar uma exception caso dê erro na criação do pedido', () async {
+    test('deve retornar uma exception caso dê erro na criação do pedido',
+        () async {
       // Arrange
       const order = CreateOrderModel(
-        table: '1',
+        //   table: '1',
         products: [],
         userPhone: '123',
         userName: '123',
@@ -55,7 +56,8 @@ void main() {
       when(() => datasource.createOrder(order)).thenThrow(Exception());
 
       // Act e Assert
-      expect(() => cartRepository.createOrder(order), throwsA(isA<Exception>()));
+      expect(
+          () => cartRepository.createOrder(order), throwsA(isA<Exception>()));
     });
   });
 }

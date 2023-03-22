@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/product/models/modifier.dart';
 import 'package:flutter_menu/features/product/models/modifier_item.dart';
 
@@ -22,7 +23,7 @@ class ModifierItemAction extends StatelessWidget {
               onPressed: () {
                 modifier.removeItem(item);
               },
-              color: Theme.of(context).primaryColor,
+              color: ColorsTheme.kPrimaryColor,
               icon: const Icon(Icons.remove),
             ),
             Padding(
@@ -30,7 +31,7 @@ class ModifierItemAction extends StatelessWidget {
               child: Text(
                 '${modifier.countOption(item)}',
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: ColorsTheme.kSecondaryColor,
                 ),
               ),
             ),
@@ -41,7 +42,7 @@ class ModifierItemAction extends StatelessWidget {
                     modifier.addItem(item);
                   }
                 : null,
-            color: Theme.of(context).primaryColor,
+            color: ColorsTheme.kPrimaryColor,
             icon: const Icon(Icons.add),
           ),
         ],
@@ -49,16 +50,18 @@ class ModifierItemAction extends StatelessWidget {
     } else {
       return Checkbox(
         value: modifier.contains(item),
-        onChanged: modifier.canAddItem || modifier.contains(item) ? (b) {
-          if (!b!) {
-            modifier.removeItem(item);
-          } else {
-            modifier.addItem(item);
-          }
-        } : null,
+        onChanged: modifier.canAddItem || modifier.contains(item)
+            ? (b) {
+                if (!b!) {
+                  modifier.removeItem(item);
+                } else {
+                  modifier.addItem(item);
+                }
+              }
+            : null,
         fillColor: MaterialStateProperty.all(
           modifier.canAddItem || modifier.contains(item)
-              ? Theme.of(context).primaryColor
+              ? ColorsTheme.kPrimaryColor
               : Colors.grey[800],
         ),
       );

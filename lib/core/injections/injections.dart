@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_menu/core/utils/token_interceptor.dart';
+import 'package:flutter_menu/core/utils/token_interception.dart';
 import 'package:flutter_menu/features/auth/datasources/strapi_auth_datasource.dart';
 import 'package:flutter_menu/features/auth/repositories/auth_repository.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';

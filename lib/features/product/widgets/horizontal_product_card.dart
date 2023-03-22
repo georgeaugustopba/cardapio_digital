@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/product/models/product.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -15,7 +16,7 @@ class HorizontalProductCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
       ),
-      color: const Color(0xff2a2e3d),
+      color: ColorsTheme.kBackgroundColor,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
@@ -30,7 +31,7 @@ class HorizontalProductCard extends StatelessWidget {
                   product.imageUrl,
                 ),
                 radius: 40,
-                backgroundColor: const Color(0xff212730),
+                backgroundColor: ColorsTheme.kSecondaryColor,
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -41,7 +42,7 @@ class HorizontalProductCard extends StatelessWidget {
                     Text(
                       product.title,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: ColorsTheme.kTextColor,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
@@ -53,8 +54,8 @@ class HorizontalProductCard extends StatelessWidget {
                         child: Text(
                           product.description,
                           maxLines: 2,
-                          style: const TextStyle(
-                            color: Colors.white70,
+                          style: TextStyle(
+                            color: ColorsTheme.kTextColor.withOpacity(0.7),
                             fontSize: 12,
                           ),
                         ),
@@ -66,8 +67,8 @@ class HorizontalProductCard extends StatelessWidget {
                         Text(
                           NumberFormat.simpleCurrency(locale: 'pt_BR')
                               .format(product.basePrice),
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                          style: const TextStyle(
+                            color: ColorsTheme.kPrimaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),

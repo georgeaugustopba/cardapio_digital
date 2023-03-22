@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 
 class CoreTextField extends StatelessWidget {
   const CoreTextField({
@@ -50,7 +51,7 @@ class CoreTextField extends StatelessWidget {
               ),
               hintText: hint,
               hintStyle: const TextStyle(
-                color: Colors.white54,
+                color: ColorsTheme.kTextColor,
               ),
             ),
             style: const TextStyle(

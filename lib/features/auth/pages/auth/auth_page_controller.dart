@@ -4,7 +4,6 @@ import 'package:flutter_menu/features/auth/repositories/auth_repository.dart';
 import 'package:get/get.dart';
 
 class AuthPageController extends GetxController {
-
   AuthPageController(this._actions);
 
   AuthPageActions? _actions;
@@ -31,10 +30,10 @@ class AuthPageController extends GetxController {
   @visibleForTesting
   Future<void> login() async {
     final result = await _repository.login(_username.value, _password.value);
-    if(result.isLeft) {
+    if (result.isLeft) {
       _actions?.showErrorMessage(result.left);
     } else {
-      print(result.right.jwt);
+      //  print(result.right.jwt);
       _actions?.navToDashboard();
     }
   }

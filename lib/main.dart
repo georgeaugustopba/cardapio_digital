@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/injections/injections.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -21,38 +22,39 @@ class _MenuAppState extends State<MenuApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Cardapio Digital - Digitalizaqui',
+      title: 'T&A Confecções',
+      color: ColorsTheme.kTextColor,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.menu.path,
       getPages: appPages,
       initialBinding: CoreBindings(),
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xff1f2027),
-        primaryColor: const Color(0xff7a3dff),
+        scaffoldBackgroundColor: ColorsTheme.kBackgroundColor.withOpacity(0.9),
+        //   primaryColor: const Color(0xff7a3dff),
         textTheme: GoogleFonts.latoTextTheme(),
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Color(0xff7a3dff),
+          cursorColor: ColorsTheme.kBackgroundColor,
         ),
         drawerTheme: DrawerThemeData(
-            backgroundColor: const Color(0xff1f2027).withOpacity(0.9)),
+            backgroundColor: ColorsTheme.kBackgroundColor.withOpacity(0.9)),
       ),
       navigatorObservers: [CustomObserver(onRouteChanged: checkRoute)],
       builder: limitWidth
           ? (context, child) {
               return ColoredBox(
-                color: const Color(0xff1f2027),
+                color: ColorsTheme.kSecondaryColor.withOpacity(0.9),
                 child: Align(
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: 700),
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(boxShadow: [
                       BoxShadow(
-                        color: const Color(0xff7a3dff).withOpacity(0.4),
+                        color: ColorsTheme.kPrimaryColor.withOpacity(0.4),
                         offset: const Offset(4, 4),
                         blurRadius: 10,
                       ),
                       BoxShadow(
-                        color: const Color(0xff7a3dff).withOpacity(0.4),
+                        color: ColorsTheme.kPrimaryColor.withOpacity(0.4),
                         offset: const Offset(-4, 4),
                         blurRadius: 10,
                       )

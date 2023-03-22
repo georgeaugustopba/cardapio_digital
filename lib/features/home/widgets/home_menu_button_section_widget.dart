@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/home/models/home_menu_button_section.dart';
 import 'package:flutter_menu/features/home/pages/home/home_page_controller.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class HomeMenuButtonSectionWidget extends StatelessWidget {
       height: 60,
       margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Material(
-        color: Theme.of(context).primaryColor,
+        color: ColorsTheme.kPrimaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

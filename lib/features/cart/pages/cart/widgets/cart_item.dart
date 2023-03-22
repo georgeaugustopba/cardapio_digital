@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/core/widgets/core_delete_button.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
@@ -21,7 +22,7 @@ class CartItem extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24),
             ),
-            color: const Color(0xff2a2e3d),
+            color: ColorsTheme.kBackgroundColor,
             clipBehavior: Clip.antiAlias,
             child: Row(
               children: [
@@ -41,13 +42,14 @@ class CartItem extends StatelessWidget {
                         Text(
                           product.title,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: ColorsTheme.kTextColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        for(final m in product.modifiers.where((m) => m.selectedOptions.isNotEmpty))
+                        for (final m in product.modifiers
+                            .where((m) => m.selectedOptions.isNotEmpty))
                           Text(
                             '${m.info.title}: ${m.selectedOptions.map((e) => e.title).join(', ')}',
                             style: const TextStyle(
@@ -57,9 +59,10 @@ class CartItem extends StatelessWidget {
                           ),
                         const SizedBox(height: 8),
                         Text(
-                          NumberFormat.simpleCurrency(locale: 'pt_BR').format(product.total),
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                          NumberFormat.simpleCurrency(locale: 'pt_BR')
+                              .format(product.total),
+                          style: const TextStyle(
+                            color: ColorsTheme.kPrimaryColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -74,15 +77,13 @@ class CartItem extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.topRight,
-          child: CoreDeleteButton(
-            onTap: () {
-              final CartController cartController = Get.find();
-              cartController.removeProduct(product);
-              if(cartController.products.isEmpty) {
-                Get.toNamed(AppRoutes.menu.path);
-              }
+          child: CoreDeleteButton(onTap: () {
+            final CartController cartController = Get.find();
+            cartController.removeProduct(product);
+            if (cartController.products.isEmpty) {
+              Get.toNamed(AppRoutes.menu.path);
             }
-          ),
+          }),
         )
       ],
     );

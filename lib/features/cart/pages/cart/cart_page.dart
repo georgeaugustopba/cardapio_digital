@@ -1,6 +1,7 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/core/widgets/core_back_button.dart';
 import 'package:flutter_menu/core/widgets/core_elevated_button.dart';
@@ -20,7 +21,6 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> implements CartPageActions {
-
   final CartController controller = Get.find();
 
   @override
@@ -59,11 +59,11 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
               bottom: 24,
               child: CoreElevatedButton(
                 title:
-                'Finalizar por ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(controller.totalPrice)}',
+                    'Finalizar por ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(controller.totalPrice)}',
                 onPressed: controller.products.isNotEmpty
                     ? () {
-                  showUserInfoDialog(context);
-                }
+                        showUserInfoDialog(context);
+                      }
                     : null,
               ),
             )
@@ -75,68 +75,69 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
 
   void showUserInfoDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
+      context: context,
+      builder: (_) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+          backgroundColor: ColorsTheme.kSecondaryColor,
+          child: Container(
+            width: 400,
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Text(
+                  'Quase lá!',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Precisamos saber um pouco sobre você para finalizar seu pedido...',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                CoreTextField(
+                  initialValue: controller.userName,
+                  title: 'Nome',
+                  hint: 'Seu nome',
+                  textInputType: TextInputType.name,
+                  onChanged: controller.setUserName,
+                ),
+                const SizedBox(height: 16),
+                CoreTextField(
+                  initialValue: controller.userPhone,
+                  title: 'Celular',
+                  hint: '(99) 91234-5678',
+                  textInputType: TextInputType.phone,
+                  formatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    TelefoneInputFormatter(),
+                  ],
+                  onChanged: controller.setUserPhone,
+                ),
+                const SizedBox(height: 32),
+                Obx(() {
+                  return CoreElevatedButton(
+                    onPressed:
+                        controller.isFormValid ? controller.sendOrder : null,
+                    title: 'Enviar pedido',
+                  );
+                }),
+              ],
             ),
-            backgroundColor: const Color(0xff212730),
-            child: Container(
-              width: 400,
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Quase lá!',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Precisamos saber um pouco sobre você para finalizar seu pedido...',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  CoreTextField(
-                    initialValue: controller.userName,
-                    title: 'Nome',
-                    hint: 'Seu nome',
-                    textInputType: TextInputType.name,
-                    onChanged: controller.setUserName,
-                  ),
-                  const SizedBox(height: 16),
-                  CoreTextField(
-                    initialValue: controller.userPhone,
-                    title: 'Celular',
-                    hint: '(99) 91234-5678',
-                    textInputType: TextInputType.phone,
-                    formatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      TelefoneInputFormatter(),
-                    ],
-                    onChanged: controller.setUserPhone,
-                  ),
-                  const SizedBox(height: 32),
-                  Obx(() {
-                    return CoreElevatedButton(
-                      onPressed: controller.isFormValid ? controller.sendOrder : null,
-                      title: 'Enviar pedido',
-                    );
-                  }),
-                ],
-              ),
-            ),
-          );
-        },
+          ),
+        );
+      },
     );
   }
 
@@ -158,12 +159,8 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
   }
 
   @override
-  void showErrorMessage() {
-
-  }
+  void showErrorMessage() {}
 
   @override
-  void showSuccessMessage() {
-
-  }
+  void showSuccessMessage() {}
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/product/models/modifier.dart';
 import 'package:flutter_menu/features/product/models/product_with_discount.dart';
 import 'package:flutter_menu/features/product/pages/product/widgets/modifier_item_action.dart';
@@ -13,12 +14,14 @@ class ProductListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('WEEKDAYS ${productWithDiscount.availableWeekdays}');
+    //print('WEEKDAYS ${productWithDiscount.availableWeekdays}');
 
     return InkWell(
-      onTap: modifier.canAddItem ? () {
-        modifier.addItem(productWithDiscount);
-      } : null,
+      onTap: modifier.canAddItem
+          ? () {
+              modifier.addItem(productWithDiscount);
+            }
+          : null,
       splashColor: Colors.white10,
       highlightColor: Colors.transparent,
       child: Padding(
@@ -26,7 +29,8 @@ class ProductListItem extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              foregroundImage: NetworkImage(productWithDiscount.product.imageUrl),
+              foregroundImage:
+                  NetworkImage(productWithDiscount.product.imageUrl),
               radius: 20,
             ),
             const SizedBox(width: 16),
@@ -37,31 +41,32 @@ class ProductListItem extends StatelessWidget {
                   Text(
                     productWithDiscount.product.title,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: ColorsTheme.kTextColor,
+                      fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      if(productWithDiscount.total != 0) ... [
+                      if (productWithDiscount.total != 0) ...[
                         Text(
                           '+ ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(productWithDiscount.total)}',
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                          style: const TextStyle(
+                            color: ColorsTheme.kPrimaryColor,
                           ),
                         ),
                         const SizedBox(width: 8),
                       ],
-                      if(productWithDiscount.discountPercentage > 0)
-                      Text(
-                        '+ ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(productWithDiscount.product.basePrice)}',
-                        style: const TextStyle(
-                          color: Color(0xff5f6066),
-                          fontSize: 10,
-                          decoration: TextDecoration.lineThrough,
+                      if (productWithDiscount.discountPercentage > 0)
+                        Text(
+                          '+ ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(productWithDiscount.product.basePrice)}',
+                          style: const TextStyle(
+                            color: Color(0xff5f6066),
+                            fontSize: 10,
+                            decoration: TextDecoration.lineThrough,
+                          ),
                         ),
-                      ),
                     ],
                   )
                 ],

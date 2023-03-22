@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:get/get.dart';
 
@@ -21,16 +22,16 @@ class CorePageTitle extends StatelessWidget {
             style: const TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: ColorsTheme.kTextColor,
             ),
           ),
           const SizedBox(height: 8),
           Obx(() {
-            if(cartController.table.value == null) return Container();
+            if (cartController.table.value == null) return Container();
             return Text(
               'Mesa ${cartController.table.value}',
               style: const TextStyle(
-                  color: Color(0xff5f6066)
+                color: ColorsTheme.kPrimaryColor,
               ),
             );
           })

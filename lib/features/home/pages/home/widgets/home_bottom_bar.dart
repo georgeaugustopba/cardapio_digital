@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 
 class HomeBottomBar extends StatelessWidget {
   const HomeBottomBar({
@@ -17,7 +18,7 @@ class HomeBottomBar extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: const Color(0xff2a2e3d),
+        color: ColorsTheme.kSecondaryColor,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[900]!,
@@ -37,10 +38,13 @@ class HomeBottomBar extends StatelessWidget {
                   duration: const Duration(milliseconds: 300),
                   width: constraints.maxWidth / 2,
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: page == 0 ? const BorderRadius.horizontal(
-                      left: Radius.circular(24),
-                    ) : const BorderRadius.horizontal(right: Radius.circular(24)),
+                    color: ColorsTheme.kPrimaryColor,
+                    borderRadius: page == 0
+                        ? const BorderRadius.horizontal(
+                            left: Radius.circular(24),
+                          )
+                        : const BorderRadius.horizontal(
+                            right: Radius.circular(24)),
                   ),
                 ),
               ),
@@ -101,7 +105,7 @@ class HomeBottomBar extends StatelessWidget {
                               size: 24,
                             ),
                             Text(
-                              'Cardápio',
+                              'Catálogo ',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 12,

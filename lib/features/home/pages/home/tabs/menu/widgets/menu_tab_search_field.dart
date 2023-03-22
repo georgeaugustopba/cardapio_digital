@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/home/pages/home/tabs/menu/menu_tab_controller.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,7 @@ class _MenuTabSearchFieldState extends State<MenuTabSearchField> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        color: const Color(0xff2a2e3d),
+        color: ColorsTheme.kSecondaryColor,
         borderRadius: BorderRadius.circular(24),
       ),
       child: TextFormField(
@@ -28,7 +29,7 @@ class _MenuTabSearchFieldState extends State<MenuTabSearchField> {
         decoration: InputDecoration(
           isCollapsed: true,
           hintText: 'Pesquisar',
-          hintStyle: const TextStyle(color: Colors.white54),
+          hintStyle: const TextStyle(color: ColorsTheme.kBackgroundColor),
           contentPadding: const EdgeInsets.symmetric(
             vertical: 14,
             horizontal: 16,
@@ -36,17 +37,17 @@ class _MenuTabSearchFieldState extends State<MenuTabSearchField> {
           border: InputBorder.none,
           suffixIcon: controller.search.value.isNotEmpty
               ? IconButton(
-            onPressed: () {
-              controller.setSearch('');
-              searchController.clear();
-            },
-            icon: const Icon(Icons.close),
-            color: const Color(0xff5f6066),
-          )
+                  onPressed: () {
+                    controller.setSearch('');
+                    searchController.clear();
+                  },
+                  icon: const Icon(Icons.close),
+                  color: Colors.black26,
+                )
               : null,
         ),
         style: const TextStyle(
-          color: Colors.white,
+          color: ColorsTheme.kBackgroundColor,
         ),
         onChanged: controller.setSearch,
       ),

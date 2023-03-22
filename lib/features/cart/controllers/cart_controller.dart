@@ -7,7 +7,6 @@ import 'package:flutter_menu/features/product/models/product.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-
   CartController({CartRepository? cartRepository, this.actions})
       : _cartRepository = cartRepository ?? Get.find();
 
@@ -20,7 +19,7 @@ class CartController extends GetxController {
   final Rxn<String> table = Rxn<String>();
 
   void setTable(String? t) {
-    if(t == null) return;
+    if (t == null) return;
     table.value = t;
   }
 
@@ -61,14 +60,17 @@ class CartController extends GetxController {
 
   RxBool loading = false.obs;
 
-  bool get isFormValid => _userName.value.length >= 4 && _userPhone.value.length >= 14 && !loading.value;
+  bool get isFormValid =>
+      _userName.value.length >= 4 &&
+      _userPhone.value.length >= 14 &&
+      !loading.value;
 
   Future<void> sendOrder() async {
     loading.value = true;
 
     try {
       await _cartRepository.createOrder(CreateOrderModel(
-        table: table.value!,
+        // table: table.value!,
         products: _products,
         userName: _userName.value,
         userPhone: _userPhone.value,
@@ -78,7 +80,7 @@ class CartController extends GetxController {
       actions?.showSuccessMessage();
       actions?.goToHome();
     } catch (e) {
-      print('Cart error $e');
+      // print('Cart error $e');
       actions?.showErrorMessage();
     }
 

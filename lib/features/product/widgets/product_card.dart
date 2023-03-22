@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/product/models/product.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +15,7 @@ class ProductCard extends StatelessWidget {
       width: 150,
       child: Material(
         clipBehavior: Clip.antiAlias,
-        color: const Color(0xff2a2e3d),
+        color: ColorsTheme.kBackgroundColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
@@ -40,7 +41,7 @@ class ProductCard extends StatelessWidget {
                         child: Text(
                           product.title,
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: ColorsTheme.kTextColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
@@ -54,17 +55,19 @@ class ProductCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            NumberFormat.simpleCurrency(locale: 'pt_BR').format(product.basePrice),
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
+                            NumberFormat.simpleCurrency(locale: 'pt_BR')
+                                .format(product.basePrice),
+                            style: const TextStyle(
+                              color: ColorsTheme.kPrimaryColor,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          if(product.originalBasePrice != null) ... [
+                          if (product.originalBasePrice != null) ...[
                             const SizedBox(width: 2),
                             Text(
-                              NumberFormat.simpleCurrency(locale: 'pt_BR').format(product.originalBasePrice!),
+                              NumberFormat.simpleCurrency(locale: 'pt_BR')
+                                  .format(product.originalBasePrice!),
                               style: const TextStyle(
                                 color: Color(0xff5f6066),
                                 fontSize: 9,

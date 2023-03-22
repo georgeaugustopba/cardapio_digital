@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/core/widgets/core_back_button.dart';
 import 'package:flutter_menu/core/widgets/core_elevated_button.dart';
@@ -21,7 +22,8 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  late final ProductPageController controller = Get.put(ProductPageController(id: widget.id));
+  late final ProductPageController controller =
+      Get.put(ProductPageController(id: widget.id));
 
   @override
   void initState() {
@@ -33,11 +35,11 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-            () {
+        () {
           if (controller.product.value == null) {
             return Center(
               child: LoadingAnimationWidget.inkDrop(
-                color: Colors.white,
+                color: ColorsTheme.kTextColor,
                 size: 50,
               ),
             );
@@ -69,7 +71,7 @@ class _ProductPageState extends State<ProductPage> {
                                 clipBehavior: Clip.antiAlias,
                                 child: Container(
                                   height: 200,
-                                  color: const Color(0xff212730),
+                                  color: ColorsTheme.kPrimaryColor,
                                 ),
                               ),
                             ),
@@ -97,7 +99,7 @@ class _ProductPageState extends State<ProductPage> {
                           style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: ColorsTheme.kTextColor,
                           ),
                         ),
                       ),
@@ -106,9 +108,9 @@ class _ProductPageState extends State<ProductPage> {
                         child: Text(
                           product.description,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
-                            color: Colors.white60,
+                            color: ColorsTheme.kTextColor.withOpacity(0.8),
                           ),
                         ),
                       ),
@@ -120,15 +122,16 @@ class _ProductPageState extends State<ProductPage> {
                           children: [
                             Text(
                               'A partir de ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(product.basePrice)}',
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
+                              style: const TextStyle(
+                                color: ColorsTheme.kPrimaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            if(product.originalBasePrice != null) ...[
+                            if (product.originalBasePrice != null) ...[
                               const SizedBox(width: 8),
                               Text(
-                                NumberFormat.simpleCurrency(locale: 'pt_BR').format(product.originalBasePrice),
+                                NumberFormat.simpleCurrency(locale: 'pt_BR')
+                                    .format(product.originalBasePrice),
                                 style: const TextStyle(
                                   color: Color(0xff5f6066),
                                   fontSize: 10,
@@ -140,7 +143,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      for(final modifier in product.modifiers)
+                      for (final modifier in product.modifiers)
                         ModifierWidget(modifier: modifier),
                     ],
                   ),
@@ -150,12 +153,15 @@ class _ProductPageState extends State<ProductPage> {
                   right: 24,
                   bottom: 24,
                   child: CoreElevatedButton(
-                    title: 'Adicionar por ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(controller.total)}',
-                    onPressed: controller.isValid ? () {
-                      final CartController cartController = Get.find();
-                      cartController.addProduct(product);
-                      Get.toNamed(AppRoutes.menu.path);
-                    } : null,
+                    title:
+                        'Adicionar por ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(controller.total)}',
+                    onPressed: controller.isValid
+                        ? () {
+                            final CartController cartController = Get.find();
+                            cartController.addProduct(product);
+                            Get.toNamed(AppRoutes.menu.path);
+                          }
+                        : null,
                   ),
                 )
               ],

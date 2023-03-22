@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/core/widgets/core_elevated_button.dart';
 import 'package:flutter_menu/core/widgets/core_text_field.dart';
@@ -23,7 +24,7 @@ class AuthPage extends StatelessWidget implements AuthPageActions {
               borderRadius: BorderRadius.circular(16),
             ),
             elevation: 2,
-            color: Colors.grey[900],
+            color: ColorsTheme.kSecondaryColor,
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(

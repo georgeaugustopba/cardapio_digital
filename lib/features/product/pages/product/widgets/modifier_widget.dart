@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/product/models/modifier.dart';
 import 'package:flutter_menu/features/product/models/modifiers/modifier_with_category.dart';
 import 'package:flutter_menu/features/product/models/modifiers/modifier_with_products.dart';
@@ -79,7 +80,7 @@ class ModifierHeader extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(24),
         ),
-        color: Color(0xff2a2e3d),
+        color: ColorsTheme.kSecondaryColor,
       ),
       padding: const EdgeInsets.all(24),
       child: Row(
@@ -109,7 +110,7 @@ class ModifierHeader extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Theme.of(context).primaryColor,
+                color: ColorsTheme.kPrimaryColor,
               ),
               padding: const EdgeInsets.all(6),
               child: const Text(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/widgets/core_page_title.dart';
 import 'package:flutter_menu/features/home/models/home_banner_section.dart';
 import 'package:flutter_menu/features/home/models/home_menu_button_section.dart';
@@ -36,13 +37,13 @@ class _HomeTabState extends State<HomeTab> {
       ),
       children: [
         const CorePageTitle(
-          title: 'Cardapio Digital - Digitalizaqui',
+          title: 'T&A Confecções',
         ),
         Obx(() {
           if (controller.sections.value == null) {
             return Center(
               child: LoadingAnimationWidget.inkDrop(
-                color: Colors.white,
+                color: ColorsTheme.kPrimaryColor,
                 size: 50,
               ),
             );

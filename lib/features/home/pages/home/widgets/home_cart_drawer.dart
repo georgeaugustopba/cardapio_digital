@@ -1,5 +1,6 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_menu/features/cart/widgets/cart_item_summary.dart';
@@ -17,7 +18,7 @@ class HomeCartDrawer extends StatelessWidget {
       return SizedBox(
         width: 102,
         child: Drawer(
-          child: Stack (
+          child: Stack(
             children: [
               LiveList.options(
                 options: const LiveOptions(
@@ -49,13 +50,13 @@ class HomeCartDrawer extends StatelessWidget {
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Theme.of(context).drawerTheme.backgroundColor!,
+                        ColorsTheme.kBackgroundColor,
                         Colors.transparent,
                       ],
-                      stops: const [0.5, 1],
+                      stops: [0.5, 1],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
@@ -70,13 +71,13 @@ class HomeCartDrawer extends StatelessWidget {
                   width: 102,
                   height: 260,
                   alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Theme.of(context).drawerTheme.backgroundColor!,
+                        ColorsTheme.kBackgroundColor,
                         Colors.transparent,
                       ],
-                      stops: const [0.5, 1],
+                      stops: [0.5, 1],
                       end: Alignment.topCenter,
                       begin: Alignment.bottomCenter,
                     ),
@@ -87,7 +88,7 @@ class HomeCartDrawer extends StatelessWidget {
                       Text(
                         '${cartController.productCount} ${cartController.productCount == 1 ? 'item' : 'itens'}',
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: ColorsTheme.kTextColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
@@ -97,20 +98,21 @@ class HomeCartDrawer extends StatelessWidget {
                         'Total:',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.white,
+                          color: ColorsTheme.kTextColor,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        NumberFormat.simpleCurrency(locale: 'pt_BR').format(cartController.totalPrice),
+                        NumberFormat.simpleCurrency(locale: 'pt_BR')
+                            .format(cartController.totalPrice),
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: ColorsTheme.kPrimaryColor,
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                       const SizedBox(height: 24),
-                      if(cartController.productCount > 0) ... [
+                      if (cartController.productCount > 0) ...[
                         SizedBox(
                           width: 54,
                           height: 54,
@@ -118,7 +120,7 @@ class HomeCartDrawer extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(27),
                             ),
-                            color: Theme.of(context).primaryColor,
+                            color: ColorsTheme.kPrimaryColor,
                             clipBehavior: Clip.antiAlias,
                             child: InkWell(
                               onTap: () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/widgets/core_delete_button.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_menu/features/product/models/product.dart';
@@ -27,11 +28,9 @@ class CartItemSummary extends StatelessWidget {
               Positioned(
                 top: 0,
                 right: 10,
-                child: CoreDeleteButton(
-                  onTap: () {
-                    Get.find<CartController>().removeProduct(product);
-                  }
-                ),
+                child: CoreDeleteButton(onTap: () {
+                  Get.find<CartController>().removeProduct(product);
+                }),
               )
             ],
           ),
@@ -42,7 +41,7 @@ class CartItemSummary extends StatelessWidget {
             product.title,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              color: Colors.white,
+              color: ColorsTheme.kTextColor,
               fontSize: 12,
             ),
           ),

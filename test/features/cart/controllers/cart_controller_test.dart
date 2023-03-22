@@ -53,23 +53,23 @@ void main() {
 
   group('testes na listagem de produtos', () {
     test('deve adicionar um produto na lista de produtos ao chamar addProduct',
-            () {
-          controller.addProduct(product);
+        () {
+      controller.addProduct(product);
 
-          expect(controller.products.length, 1);
-          expect(controller.products, contains(product));
-          verify(() => notifyListeners()).called(1);
-        });
+      expect(controller.products.length, 1);
+      expect(controller.products, contains(product));
+      verify(() => notifyListeners()).called(1);
+    });
 
     test('deve remover um produto na lista de produtos ao chamar removeProduct',
-            () {
-          controller.addProduct(product);
+        () {
+      controller.addProduct(product);
 
-          controller.removeProduct(product);
+      controller.removeProduct(product);
 
-          expect(controller.products, isEmpty);
-          verify(() => notifyListeners()).called(2);
-        });
+      expect(controller.products, isEmpty);
+      verify(() => notifyListeners()).called(2);
+    });
 
     test('deve retornar a quantidade total de produtos no productCount', () {
       controller.addProduct(product);
@@ -91,7 +91,8 @@ void main() {
   });
 
   group('testes do formulário do usuário', () {
-    test('deve retornar true no isFormValid caso o nome e telefone sejam válidos',
+    test(
+        'deve retornar true no isFormValid caso o nome e telefone sejam válidos',
         () {
       controller.setUserName('Daniel');
       controller.setUserPhone('(11) 91234-5678');
@@ -102,7 +103,8 @@ void main() {
       verify(() => notifyListeners()).called(2);
     });
 
-    test('deve retornar false no isFormValid caso o nome e/ou telefone sejam inválidos',
+    test(
+        'deve retornar false no isFormValid caso o nome e/ou telefone sejam inválidos',
         () {
       controller.setUserName('Da');
       controller.setUserPhone('(11) 91234-5678');
@@ -120,7 +122,7 @@ void main() {
       'em caso de sucesso na criação de pedido, deve limpar o carrinho e redirecionar para a home',
       () async {
     const order = CreateOrderModel(
-      table: '1',
+      // table: '1',
       products: [product],
       userName: 'Daniel',
       userPhone: '123',
@@ -144,21 +146,22 @@ void main() {
   });
 
   test(
-      'deve exibir uma mensagem de erro e manter o carrinho intacto caso de erro na criação do pedido', () async {
-      when(() => cartRepository.createOrder(any())).thenThrow(Exception());
+      'deve exibir uma mensagem de erro e manter o carrinho intacto caso de erro na criação do pedido',
+      () async {
+    when(() => cartRepository.createOrder(any())).thenThrow(Exception());
 
-      controller.addProduct(product);
-      controller.setTable('1');
-      verify(() => notifyListeners()).called(1);
+    controller.addProduct(product);
+    controller.setTable('1');
+    verify(() => notifyListeners()).called(1);
 
-      await controller.sendOrder();
+    await controller.sendOrder();
 
-      expect(controller.products, contains(product));
-      expect(controller.loading, isFalse);
-      verify(() => actions.showErrorMessage()).called(1);
-      verify(() => notifyListeners()).called(2);
-      verifyNoMoreInteractions(actions);
-    });
+    expect(controller.products, contains(product));
+    expect(controller.loading, isFalse);
+    verify(() => actions.showErrorMessage()).called(1);
+    verify(() => notifyListeners()).called(2);
+    verifyNoMoreInteractions(actions);
+  });
 
   test('deve colocar actions como null ao dar dispose', () {
     controller.dispose();

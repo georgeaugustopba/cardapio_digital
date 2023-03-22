@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/widgets/core_page_title.dart';
 import 'package:flutter_menu/features/home/models/home_banner_section.dart';
 import 'package:flutter_menu/features/home/models/home_products_carousel_section.dart';
@@ -35,13 +36,15 @@ class _MenuTabState extends State<MenuTab> {
         bottom: 24 + 60 + 16,
       ),
       children: [
-        const CorePageTitle(title: 'Cardápio',),
+        const CorePageTitle(
+          title: 'Catálogo T&A Confecções',
+        ),
         const SizedBox(height: 24),
         Obx(() {
           if (controller.sections == null) {
             return Center(
               child: LoadingAnimationWidget.inkDrop(
-                color: Colors.white,
+                color: ColorsTheme.kPrimaryColor,
                 size: 50,
               ),
             );
@@ -59,8 +62,8 @@ class _MenuTabState extends State<MenuTab> {
                   if (section is HomeProductsListingSection) {
                     return HomeProductsListingSectionWidget(section: section);
                   } else if (section is HomeBannerSection) {
-    return HomeBannerSectionWidget(section: section);
-    } else if(section is HomeProductsCarouselSection) {
+                    return HomeBannerSectionWidget(section: section);
+                  } else if (section is HomeProductsCarouselSection) {
                     return HomeProductsCarouselSectionWidget(section: section);
                   } else {
                     return Container();

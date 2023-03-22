@@ -8,9 +8,8 @@ class ModifierWithCategory extends Modifier {
   ModifierWithCategory.fromJson(Map<String, dynamic> json)
       : category = Category.fromJson(json['category']['data'])!,
         super(
-        info: ModifierInfo.fromJson(json['info']),
-      );
+          info: ModifierInfo.fromJson(json['info']),
+        );
 
   final Category category;
-
 }

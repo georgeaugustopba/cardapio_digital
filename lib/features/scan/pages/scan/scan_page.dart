@@ -19,12 +19,12 @@ class _ScanPageState extends State<ScanPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const CorePageTitle(
-                title: 'Bem-vindo(a)! ao Cardapio Digital - Digitalizaqui',
+                title: 'Bem-vindo(a)! a Loja online - T&A Confecções',
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                 child: Text(
-                  'Para acessar o cardápio, abra sua câmera e escaneie o QR Code localizado em sua mesa.',
+                  'Para acessar o Catálogo T&A Confecções, abra sua câmera e escaneie o QR Code localizado em sua mesa.',
                   style: TextStyle(
                     color: Colors.white,
                   ),

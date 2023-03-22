@@ -17,7 +17,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final DashboardPageController controller = Get.put(DashboardPageController());
 
-
   @override
   void initState() {
     super.initState();
@@ -28,31 +27,35 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<DashboardPageController>(
-        builder: (_) {
-          return Obx(() {
-            if (controller.items.value == null) {
-              return Center(
-                child: LoadingAnimationWidget.inkDrop(
-                  color: Colors.white,
-                  size: 50,
+      body: SingleChildScrollView(
+        child: GetBuilder<DashboardPageController>(
+          builder: (_) {
+            return Obx(() {
+              if (controller.items.value == null) {
+                return Center(
+                  child: LoadingAnimationWidget.inkDrop(
+                    color: Colors.white,
+                    size: 50,
+                  ),
+                );
+              }
+
+              return Padding(
+                padding: const EdgeInsets.all(16),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final i in controller.items.value!)
+                      DashboardCard(
+                        item: i,
+                      ),
+                  ],
                 ),
               );
-            }
-
-            return Padding(
-              padding: const EdgeInsets.all(16),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final i in controller.items.value!)
-                    DashboardCard(item: i,),
-                ],
-              ),
-            );
-          });
-        },
+            });
+          },
+        ),
       ),
     );
   }

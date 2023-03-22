@@ -5,9 +5,12 @@ import 'package:flutter_menu/features/dashboard/model/dashboard_item.dart';
 import 'package:flutter_menu/features/order/models/order.dart';
 import 'package:flutter_menu/features/order/repositories/order_repository.dart';
 import 'package:get/get.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class DashboardPageController extends GetxController {
   DashboardPageController();
+
+  final player = AudioPlayer();
 
   OrderStatus? status;
   final OrderRepository _orderRepository = Get.find();

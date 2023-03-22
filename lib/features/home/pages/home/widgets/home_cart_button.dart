@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,8 @@ class HomeCartButton extends StatefulWidget {
   State<HomeCartButton> createState() => _HomeCartButtonState();
 }
 
-class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProviderStateMixin {
+class _HomeCartButtonState extends State<HomeCartButton>
+    with SingleTickerProviderStateMixin {
   final CartController cartController = Get.find();
 
   late AnimationController controller = AnimationController(
@@ -25,13 +27,12 @@ class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProvid
   );
 
   late Animation<Color?> colorAnimation = ColorTween(
-      begin: Theme.of(context).primaryColor,
-      end: const Color(0xff393c44)
+    begin: ColorsTheme.kPrimaryColor,
+    end: ColorsTheme.kSecondaryColor,
   ).animate(controller);
 
-  late Animation<double> rotationAnimation = Tween<double>(
-    begin: 1, end: 0.75
-  ).animate(controller);
+  late Animation<double> rotationAnimation =
+      Tween<double>(begin: 1, end: 0.75).animate(controller);
 
   late Animation<double> scaleAnimation = TweenSequence<double>([
     TweenSequenceItem(tween: Tween(begin: 1, end: 0), weight: 1),
@@ -42,7 +43,7 @@ class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProvid
   void didUpdateWidget(HomeCartButton oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if(oldWidget.drawerOpen != widget.drawerOpen) {
+    if (oldWidget.drawerOpen != widget.drawerOpen) {
       controller.animateTo(widget.drawerOpen ? 1 : 0);
     }
   }
@@ -71,7 +72,7 @@ class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProvid
                   child: InkWell(
                     onTap: () {
                       final scaffold = widget.scaffoldKey.currentState!;
-                      if(scaffold.isEndDrawerOpen) {
+                      if (scaffold.isEndDrawerOpen) {
                         scaffold.closeEndDrawer();
                       } else {
                         scaffold.openEndDrawer();
@@ -82,7 +83,9 @@ class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProvid
                       child: ScaleTransition(
                         scale: scaleAnimation,
                         child: Icon(
-                          controller.value < 0.5 ? Icons.shopping_cart_outlined : Icons.close,
+                          controller.value < 0.5
+                              ? Icons.shopping_cart_outlined
+                              : Icons.close,
                           color: Colors.white,
                         ),
                       ),
@@ -107,17 +110,16 @@ class _HomeCartButtonState extends State<HomeCartButton> with SingleTickerProvid
                 ),
                 margin: EdgeInsets.only(right: widget.drawerOpen ? 14 : 0),
                 alignment: Alignment.center,
-                child: Obx((){
-                    return Text(
-                      cartController.productCount.toString(),
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    );
-                  }
-                ),
+                child: Obx(() {
+                  return Text(
+                    cartController.productCount.toString(),
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: ColorsTheme.kPrimaryColor,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  );
+                }),
               ),
             ),
           )

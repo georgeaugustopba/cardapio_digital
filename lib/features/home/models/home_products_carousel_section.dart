@@ -22,12 +22,14 @@ class HomeProductsCarouselSection extends HomeSection {
 
   @override
   HomeSection? copyFiltered(String search) {
-    final filteredProducts = products.where(
-      (p) =>
-          p.title.clear.contains(search) ||
-          p.description.clear.contains(search),
-    ).toList();
-    if(filteredProducts.isEmpty) return null;
+    final filteredProducts = products
+        .where(
+          (p) =>
+              p.title.clear.contains(search) ||
+              p.description.clear.contains(search),
+        )
+        .toList();
+    if (filteredProducts.isEmpty) return null;
     return HomeProductsCarouselSection(
       title: title,
       products: filteredProducts,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 
 class CoreElevatedButton extends StatelessWidget {
   const CoreElevatedButton({
@@ -19,8 +20,8 @@ class CoreElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: color ?? Theme.of(context).primaryColor,
-        disabledBackgroundColor: Colors.grey[800]!.withOpacity(0.7),
+        backgroundColor: color ?? ColorsTheme.kPrimaryColor,
+        disabledBackgroundColor: ColorsTheme.kPrimaryColor.withOpacity(0.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
