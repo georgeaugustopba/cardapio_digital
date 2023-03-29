@@ -1,10 +1,12 @@
 import 'dart:collection';
 
+import 'package:flutter_menu/core/utils/utils_services.dart';
 import 'package:flutter_menu/features/cart/models/create_order_model.dart';
 import 'package:flutter_menu/features/cart/pages/cart/cart_page_actions.dart';
 import 'package:flutter_menu/features/cart/repositories/cart_repository.dart';
 import 'package:flutter_menu/features/product/models/product.dart';
 import 'package:get/get.dart';
+import 'package:mercadopago_sdk/mercadopago_sdk.dart';
 
 class CartController extends GetxController {
   CartController({CartRepository? cartRepository, this.actions})
@@ -13,6 +15,8 @@ class CartController extends GetxController {
   final RxList<Product> _products = RxList<Product>([]);
 
   final CartRepository _cartRepository;
+
+  final UtilServices utilServices = UtilServices();
 
   CartPageActions? actions;
 
@@ -29,13 +33,26 @@ class CartController extends GetxController {
 
   void addProduct(Product product) {
     _products.add(product);
+    utilServices.showToast(message: 'Produto adicionado com sucesso');
   }
 
   void removeProduct(Product product) {
     _products.remove(product);
+    utilServices.showToast(message: 'Produto removido com sucesso');
+  }
+
+  void productClean() {
+    _products.clear();
   }
 
   int get productCount => _products.length;
+  // int get productCont => productLimited + ;
+  bool get productLimited => productCount >= 2;
+
+  int cartItemsQuantity() =>
+      _products.map((e) => e.quantity).fold(0, (a, b) => a + b);
+
+  bool get isCheckoutValid => cartItemsQuantity() >= 3;
 
   UnmodifiableListView<Product> get products => UnmodifiableListView(_products);
 
@@ -46,9 +63,15 @@ class CartController extends GetxController {
 
   final RxString _userName = ''.obs;
   final RxString _userPhone = ''.obs;
+  final RxString _userCep = ''.obs;
+  final RxString _userRua = ''.obs;
+  final RxString _userComplemento = ''.obs;
 
   String get userName => _userName.value;
   String get userPhone => _userPhone.value;
+  String get userCep => _userCep.value;
+  String get userRua => _userRua.value;
+  String get userComplemento => _userComplemento.value;
 
   void setUserName(String t) {
     _userName.value = t;
@@ -56,6 +79,18 @@ class CartController extends GetxController {
 
   void setUserPhone(String t) {
     _userPhone.value = t;
+  }
+
+  void setUserCep(String t) {
+    _userCep.value = t;
+  }
+
+  void setUserRua(String t) {
+    _userRua.value = t;
+  }
+
+  void setUserComplemento(String t) {
+    _userComplemento.value = t;
   }
 
   RxBool loading = false.obs;
@@ -74,17 +109,44 @@ class CartController extends GetxController {
         products: _products,
         userName: _userName.value,
         userPhone: _userPhone.value,
+        userCep: _userCep.value,
+        userRua: _userRua.value,
+        userComplemento: _userComplemento.value,
       ));
 
-      _products.clear();
+      //  _products.clear();
       actions?.showSuccessMessage();
-      actions?.goToHome();
+      actions?.goToPayment();
     } catch (e) {
       // print('Cart error $e');
       actions?.showErrorMessage();
     }
 
     loading.value = false;
+  }
+
+  Future<Map<String, dynamic>> index() async {
+    var mp = MP('610069341879546', 'jZ7bKPbDoqDhjxLt9WRx0TRJqk1iwOFb');
+
+    String? token = await mp.getAccessToken();
+
+    //print('Mercadopago token $token');
+
+    var preference = {
+      "items": [
+        {
+          "title": "Test",
+          "quantity": 1,
+          "currency_id": "BR",
+          "unit_price": 10.4
+        }
+      ]
+    };
+
+    var result = await mp.createPreference(preference);
+    print(result);
+
+    return result;
   }
 
   @override

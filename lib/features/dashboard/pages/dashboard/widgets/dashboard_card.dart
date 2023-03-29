@@ -60,14 +60,15 @@ class DashboardCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
-                'Mesa: ${item.table}',
-                style: const TextStyle(fontSize: 16),
+                'teste',
+                //      'Usuário: ${item.user}',
+                style: TextStyle(fontSize: 16),
               ),
             ),
-            for(final order in item.orders)
+            for (final order in item.orders)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -129,7 +130,7 @@ class DashboardCard extends StatelessWidget {
                     children: [
                       for (final p in order.products.length > 4
                           ? order.products
-                          .sublist(0, (order.products.length / 2).floor())
+                              .sublist(0, (order.products.length / 2).floor())
                           : order.products)
                         Padding(
                           padding: const EdgeInsets.only(
@@ -148,9 +149,10 @@ class DashboardCard extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  if(order.status != OrderStatus.preparing)
+                                  if (order.status != OrderStatus.preparing)
                                     Text(
-                                      NumberFormat.simpleCurrency(locale: 'pt_BR')
+                                      NumberFormat.simpleCurrency(
+                                              locale: 'pt_BR')
                                           .format(p.totalPrice),
                                       style: const TextStyle(
                                         fontSize: 14,
@@ -218,6 +220,7 @@ class DashboardCard extends StatelessWidget {
                         onPressed: () {
                           final DashboardPageController controller = Get.find();
                           controller.setOrderPaid(order);
+                          // controller.SetPlayer();
                         },
                         color: Colors.grey[700],
                         padding: const EdgeInsets.all(4),
@@ -226,7 +229,7 @@ class DashboardCard extends StatelessWidget {
                     )
                 ],
               ),
-            if(item.orders.length > 1) ... [
+            if (item.orders.length > 1) ...[
               Container(
                 height: 1,
                 color: Colors.black,

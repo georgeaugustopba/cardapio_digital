@@ -1,5 +1,4 @@
 class User {
-
   const User({
     required this.id,
     required this.username,
@@ -13,18 +12,6 @@ class User {
   @override
   String toString() {
     return 'User{ id: $id, username: $username, email: $email,}';
-  }
-
-  User copyWith({
-    int? id,
-    String? username,
-    String? email,
-  }) {
-    return User(
-      id: id ?? this.id,
-      username: username ?? this.username,
-      email: email ?? this.email,
-    );
   }
 
   factory User.fromJson(Map<String, dynamic> map) {

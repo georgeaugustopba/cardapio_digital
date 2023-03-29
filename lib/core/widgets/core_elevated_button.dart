@@ -21,7 +21,7 @@ class CoreElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color ?? ColorsTheme.kPrimaryColor,
-        disabledBackgroundColor: ColorsTheme.kPrimaryColor.withOpacity(0.2),
+        disabledBackgroundColor: ColorsTheme.kBackgroundColor.withOpacity(0.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

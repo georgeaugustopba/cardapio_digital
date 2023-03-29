@@ -80,7 +80,7 @@ class ModifierHeader extends StatelessWidget {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(24),
         ),
-        color: ColorsTheme.kSecondaryColor,
+        color: ColorsTheme.kBackgroundColor,
       ),
       padding: const EdgeInsets.all(24),
       child: Row(

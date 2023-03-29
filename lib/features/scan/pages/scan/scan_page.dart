@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/widgets/core_page_title.dart';
 
 class ScanPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ScanPageState extends State<ScanPage> {
                 child: Center(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xff212730),
+                      color: ColorsTheme.kSecondaryColor,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     padding: const EdgeInsets.all(16),

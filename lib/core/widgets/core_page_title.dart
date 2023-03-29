@@ -22,7 +22,7 @@ class CorePageTitle extends StatelessWidget {
             style: const TextStyle(
               fontSize: 26,
               fontWeight: FontWeight.bold,
-              color: ColorsTheme.kTextColor,
+              color: ColorsTheme.kTextColorWite,
             ),
           ),
           const SizedBox(height: 8),

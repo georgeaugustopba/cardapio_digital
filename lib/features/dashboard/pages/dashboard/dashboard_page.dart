@@ -15,6 +15,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  // AudioPlayer? audioPlayer;
   final DashboardPageController controller = Get.put(DashboardPageController());
 
   @override
@@ -22,6 +23,8 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
 
     controller.loadOrders(widget.status);
+
+    // audioPlayer = AudioPlayer();
   }
 
   @override

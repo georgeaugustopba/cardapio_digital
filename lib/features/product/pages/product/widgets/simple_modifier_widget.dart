@@ -42,7 +42,7 @@ class SimpleModifierWidget extends StatelessWidget {
                             Text(
                               option.title,
                               style: const TextStyle(
-                                color: ColorsTheme.kTextColor,
+                                color: ColorsTheme.kTextColorWite,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
                               ),
@@ -51,8 +51,7 @@ class SimpleModifierWidget extends StatelessWidget {
                               Text(
                                 '+ ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(option.price!)}',
                                 style: const TextStyle(
-                                  color: ColorsTheme.kTextColor,
-                                  fontWeight: FontWeight.bold,
+                                  color: ColorsTheme.kPrimaryColor,
                                 ),
                               )
                           ],

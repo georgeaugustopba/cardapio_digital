@@ -17,7 +17,7 @@ class CoreBackButton extends StatelessWidget {
       child: InkWell(
         onTap: () => Get.routing.isBack == true
             ? Get.back()
-            : Get.offNamed(AppRoutes.menu.path),
+            : Get.offAndToNamed(AppRoutes.menu.path),
         child: const SizedBox(
           width: 42,
           height: 42,

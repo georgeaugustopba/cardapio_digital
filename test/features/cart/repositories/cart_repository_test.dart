@@ -23,11 +23,12 @@ void main() {
 
   group('testes de cenários de sucesso', () {
     const order = CreateOrderModel(
-      //   table: '1',
-      products: [],
-      userPhone: '123',
-      userName: '123',
-    );
+        //   table: '1',
+        products: [],
+        userPhone: '123',
+        userName: '123',
+        userCep: '22',
+        userRua: '');
 
     setUp(() {
       when(() => datasource.createOrder(order)).thenAnswer((_) async => 1);
@@ -48,11 +49,12 @@ void main() {
         () async {
       // Arrange
       const order = CreateOrderModel(
-        //   table: '1',
-        products: [],
-        userPhone: '123',
-        userName: '123',
-      );
+          //   table: '1',
+          products: [],
+          userPhone: '123',
+          userName: '123',
+          userCep: '',
+          userRua: '');
       when(() => datasource.createOrder(order)).thenThrow(Exception());
 
       // Act e Assert

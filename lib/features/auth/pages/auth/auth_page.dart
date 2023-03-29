@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
 import 'package:flutter_menu/core/widgets/core_elevated_button.dart';
+import 'package:flutter_menu/core/widgets/core_text_buttom.dart';
 import 'package:flutter_menu/core/widgets/core_text_field.dart';
 import 'package:flutter_menu/features/auth/datasources/strapi_auth_datasource.dart';
 import 'package:flutter_menu/features/auth/pages/auth/auth_page_actions.dart';
@@ -16,6 +17,7 @@ class AuthPage extends StatelessWidget implements AuthPageActions {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff2a2e3d),
       body: Center(
         child: SizedBox(
           width: 400,
@@ -24,7 +26,7 @@ class AuthPage extends StatelessWidget implements AuthPageActions {
               borderRadius: BorderRadius.circular(16),
             ),
             elevation: 2,
-            color: ColorsTheme.kSecondaryColor,
+            color: ColorsTheme.kSecondaryColor.withOpacity(0.8),
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
@@ -37,7 +39,7 @@ class AuthPage extends StatelessWidget implements AuthPageActions {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: ColorsTheme.kBackgroundColor,
                     ),
                   ),
                   const SizedBox(height: 32),
@@ -60,6 +62,12 @@ class AuthPage extends StatelessWidget implements AuthPageActions {
                       title: 'Entrar',
                     );
                   }),
+                  const SizedBox(height: 10),
+                  CoreTextButtom(
+                    title: 'Fazer um novo Cadastro',
+                    color: ColorsTheme.kBackgroundColor,
+                    ontap: () => Get.offNamed(AppRoutes.signup.path),
+                  ),
                 ],
               ),
             ),

@@ -17,7 +17,7 @@ class StrapiAuthDatasource {
 
       return Right(loginResponse);
     } on DioError catch (e) {
-      if (e.type == DioErrorType.badResponse) {
+      if (e.type == DioErrorType.response) {
         return const Left(LoginError.invalidCredentials);
       }
       return const Left(LoginError.unexpectedError);

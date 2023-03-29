@@ -41,7 +41,7 @@ class ProductListItem extends StatelessWidget {
                   Text(
                     productWithDiscount.product.title,
                     style: const TextStyle(
-                      color: ColorsTheme.kTextColor,
+                      color: ColorsTheme.kTextColorWite,
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),

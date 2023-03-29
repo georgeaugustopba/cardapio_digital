@@ -99,7 +99,7 @@ class _ProductPageState extends State<ProductPage> {
                           style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: ColorsTheme.kTextColor,
+                            color: ColorsTheme.kTextColorWite,
                           ),
                         ),
                       ),
@@ -110,7 +110,7 @@ class _ProductPageState extends State<ProductPage> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 14,
-                            color: ColorsTheme.kTextColor.withOpacity(0.8),
+                            color: ColorsTheme.kTextColorWite.withOpacity(0.8),
                           ),
                         ),
                       ),
@@ -159,7 +159,8 @@ class _ProductPageState extends State<ProductPage> {
                         ? () {
                             final CartController cartController = Get.find();
                             cartController.addProduct(product);
-                            Get.toNamed(AppRoutes.menu.path);
+                            cartController.index();
+                            Get.offNamed(AppRoutes.menu.path);
                           }
                         : null,
                   ),

@@ -31,6 +31,7 @@ void main() {
     imageUrl: '',
     category: null,
     modifiers: [],
+    quantity: 3,
   );
 
   setUpAll(() {
@@ -122,11 +123,12 @@ void main() {
       'em caso de sucesso na criação de pedido, deve limpar o carrinho e redirecionar para a home',
       () async {
     const order = CreateOrderModel(
-      // table: '1',
-      products: [product],
-      userName: 'Daniel',
-      userPhone: '123',
-    );
+        // table: '1',
+        products: [product],
+        userName: 'Daniel',
+        userPhone: '123',
+        userCep: 'dd',
+        userRua: '');
 
     when(() => cartRepository.createOrder(order)).thenAnswer((_) async => 1);
 

@@ -1,16 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_menu/features/dashboard/model/dashboard_item.dart';
 import 'package:flutter_menu/features/order/models/order.dart';
 import 'package:flutter_menu/features/order/repositories/order_repository.dart';
 import 'package:get/get.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class DashboardPageController extends GetxController {
   DashboardPageController();
-
-  final player = AudioPlayer();
 
   OrderStatus? status;
   final OrderRepository _orderRepository = Get.find();
@@ -37,18 +34,11 @@ class DashboardPageController extends GetxController {
       final orders = await _orderRepository.getOrders(status);
       if (status == OrderStatus.delivered) {
         final items = <DashboardItem>[];
-        for (final o in orders) {
-          if (items.any((i) => i.table == o.table)) {
-            items.firstWhere((i) => i.table == o.table).orders.add(o);
-          } else {
-            items.add(DashboardItem(table: o.table, orders: [o]));
-          }
-        }
+
         this.items.value = items;
       } else {
         items.value = orders
-            .map<DashboardItem>(
-                (e) => DashboardItem(table: e.table, orders: [e]))
+            .map<DashboardItem>((e) => DashboardItem(orders: [e]))
             .toList();
       }
     } catch (e) {
@@ -86,13 +76,7 @@ class DashboardPageController extends GetxController {
   }
 
   void _removeOrderFromDashboard(Order order) {
-    items.update((items) {
-      final item = items!.firstWhere((i) => i.table == order.table);
-      item.orders.remove(order);
-      if (item.orders.isEmpty) {
-        items.remove(item);
-      }
-    });
+    items.update((items) {});
   }
 
   @override

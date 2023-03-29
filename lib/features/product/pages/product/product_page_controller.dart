@@ -33,5 +33,4 @@ class ProductPageController extends GetxController {
 
   bool get isValid =>
       product.value != null && !product.value!.modifiers.any((m) => !m.isValid);
-
 }

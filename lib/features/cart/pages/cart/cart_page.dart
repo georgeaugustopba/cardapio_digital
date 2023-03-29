@@ -1,12 +1,10 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_menu/core/constants/colors_constants.dart';
 import 'package:flutter_menu/core/routes/app_routes.dart';
+import 'package:flutter_menu/core/utils/utils_services.dart';
 import 'package:flutter_menu/core/widgets/core_back_button.dart';
+import 'package:flutter_menu/core/widgets/core_dialog_widget.dart';
 import 'package:flutter_menu/core/widgets/core_elevated_button.dart';
 import 'package:flutter_menu/core/widgets/core_page_title.dart';
-import 'package:flutter_menu/core/widgets/core_text_field.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_menu/features/cart/pages/cart/cart_page_actions.dart';
 import 'package:flutter_menu/features/cart/pages/cart/widgets/cart_item.dart';
@@ -22,6 +20,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> implements CartPageActions {
   final CartController controller = Get.find();
+  final UtilServices utilServices = UtilServices();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,13 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
                     'Finalizar por ${NumberFormat.simpleCurrency(locale: 'pt_BR').format(controller.totalPrice)}',
                 onPressed: controller.products.isNotEmpty
                     ? () {
-                        showUserInfoDialog(context);
+                        if (controller.isCheckoutValid) {
+                          ShowUserInfoDialog().showUserInfoDialog(context);
+                        } else {
+                          utilServices.showToast(
+                              message:
+                                  'Adicione no mínimo 30 itens no seu carrinho para continuar');
+                        }
                       }
                     : null,
               ),
@@ -71,74 +76,6 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
         ),
       );
     });
-  }
-
-  void showUserInfoDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-          backgroundColor: ColorsTheme.kSecondaryColor,
-          child: Container(
-            width: 400,
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Quase lá!',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Precisamos saber um pouco sobre você para finalizar seu pedido...',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                CoreTextField(
-                  initialValue: controller.userName,
-                  title: 'Nome',
-                  hint: 'Seu nome',
-                  textInputType: TextInputType.name,
-                  onChanged: controller.setUserName,
-                ),
-                const SizedBox(height: 16),
-                CoreTextField(
-                  initialValue: controller.userPhone,
-                  title: 'Celular',
-                  hint: '(99) 91234-5678',
-                  textInputType: TextInputType.phone,
-                  formatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                    TelefoneInputFormatter(),
-                  ],
-                  onChanged: controller.setUserPhone,
-                ),
-                const SizedBox(height: 32),
-                Obx(() {
-                  return CoreElevatedButton(
-                    onPressed:
-                        controller.isFormValid ? controller.sendOrder : null,
-                    title: 'Enviar pedido',
-                  );
-                }),
-              ],
-            ),
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -159,8 +96,20 @@ class _CartPageState extends State<CartPage> implements CartPageActions {
   }
 
   @override
-  void showErrorMessage() {}
+  void showErrorMessage() {
+    utilServices.showToast(message: 'Erro ao fazer pedido', isError: true);
+  }
 
   @override
-  void showSuccessMessage() {}
+  void showSuccessMessage() {
+    utilServices.showToast(
+      message: 'Pedido feito com sucesso',
+      onTap: () => Get.offAndToNamed(AppRoutes.cart.path),
+    );
+  }
+
+  @override
+  void goToPayment() {
+    Get.toNamed(AppRoutes.checkout.path);
+  }
 }

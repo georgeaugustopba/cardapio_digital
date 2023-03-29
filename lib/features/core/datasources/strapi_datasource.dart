@@ -88,7 +88,7 @@ class StrapiDatasourceImpl implements StrapiDatasource {
       queryParameters: {
         if (status != null) 'filters[status][\$eq]': status.name,
         'populate': 'deep,6',
-        'sort': 'createdAt:asc'
+        'sort': 'createdAt:asc',
       },
     );
 

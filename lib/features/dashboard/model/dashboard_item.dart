@@ -1,9 +1,9 @@
 import 'package:flutter_menu/features/order/models/order.dart';
 
 class DashboardItem {
-  DashboardItem({required this.table, required this.orders});
+  DashboardItem({required this.orders});
 
-  final int table;
+  //final User user;
   final List<Order> orders;
 
   num get total => orders.fold(

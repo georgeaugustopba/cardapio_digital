@@ -37,7 +37,7 @@ class _HomeTabState extends State<HomeTab> {
       ),
       children: [
         const CorePageTitle(
-          title: 'T&A Confecções',
+          title: 'T&A Moda Feminina',
         ),
         Obx(() {
           if (controller.sections.value == null) {

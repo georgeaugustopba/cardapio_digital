@@ -3,30 +3,31 @@ enum OrderStatus { preparing, delivered, paid }
 class Order {
   Order({
     required this.id,
-    required this.table,
+    // required this.table,
     required this.totalPrice,
     required this.clientName,
     required this.clientPhone,
     required this.products,
     required this.status,
     required this.createdAt,
+    // this.user,
   });
 
   final int id;
-  final int table;
+  // final int table;
   late num totalPrice;
   final String clientName;
   final String clientPhone;
   final List<OrderProduct> products;
   final OrderStatus status;
   final DateTime createdAt;
+  //final User? user;
 
   factory Order.fromMap(Map<String, dynamic> json) {
     final map = json['attributes'];
 
     return Order(
       id: json['id'] as int,
-      table: map['table'] as int,
       totalPrice: map['totalPrice'] as num,
       clientName: map['clientName'] as String,
       clientPhone: map['clientPhone'] as String,
@@ -35,6 +36,7 @@ class Order {
           .toList(),
       status: OrderStatus.values.byName(map['status'] ?? 'preparing'),
       createdAt: DateTime.parse(map['createdAt']),
+      //  user: User.fromJson(map['user']),
     );
   }
 
@@ -45,7 +47,7 @@ class Order {
 
   @override
   String toString() {
-    return 'Order{ table: $table, totalPrice: $totalPrice, clientName: $clientName, clientPhone: $clientPhone, products: $products,}';
+    return 'Order{  totalPrice: $totalPrice, clientName: $clientName, clientPhone: $clientPhone, products: $products, status: $status}';
   }
 }
 

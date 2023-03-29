@@ -42,7 +42,7 @@ class HorizontalProductCard extends StatelessWidget {
                     Text(
                       product.title,
                       style: const TextStyle(
-                        color: ColorsTheme.kTextColor,
+                        color: ColorsTheme.kTextColorWite,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,7 +55,7 @@ class HorizontalProductCard extends StatelessWidget {
                           product.description,
                           maxLines: 2,
                           style: TextStyle(
-                            color: ColorsTheme.kTextColor.withOpacity(0.7),
+                            color: ColorsTheme.kTextColorWite.withOpacity(0.7),
                             fontSize: 12,
                           ),
                         ),

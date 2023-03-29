@@ -12,6 +12,8 @@ class CoreTextField extends StatelessWidget {
     required this.onChanged,
     this.initialValue,
     this.obscure = false,
+    this.color = ColorsTheme.kBackgroundColor,
+    this.textColor,
   }) : super(key: key);
 
   final String? initialValue;
@@ -21,6 +23,8 @@ class CoreTextField extends StatelessWidget {
   final List<TextInputFormatter>? formatters;
   final Function(String) onChanged;
   final bool obscure;
+  final Color color;
+  final TextStyle? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class CoreTextField extends StatelessWidget {
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xff2a2e3d),
+            color: color,
             borderRadius: BorderRadius.circular(24),
           ),
           child: TextFormField(
@@ -50,9 +54,7 @@ class CoreTextField extends StatelessWidget {
                 horizontal: 16,
               ),
               hintText: hint,
-              hintStyle: const TextStyle(
-                color: ColorsTheme.kTextColor,
-              ),
+              hintStyle: textColor,
             ),
             style: const TextStyle(
               color: Colors.white,

@@ -37,7 +37,7 @@ class _MenuTabState extends State<MenuTab> {
       ),
       children: [
         const CorePageTitle(
-          title: 'Catálogo T&A Confecções',
+          title: 'Catálogo - T&A Moda Feminina',
         ),
         const SizedBox(height: 24),
         Obx(() {

@@ -22,10 +22,10 @@ void main() {
       // Arrange
       when(() => dio.get('/products/5', queryParameters: {'populate': 'deep'}))
           .thenAnswer(
-            (_) async => Response(
+        (_) async => Response(
           requestOptions: RequestOptions(path: ''),
-          data: jsonDecode(
-              File('test/fixtures/get_product_response.json').readAsStringSync()),
+          data: jsonDecode(File('test/fixtures/get_product_response.json')
+              .readAsStringSync()),
           statusCode: 200,
         ),
       );
@@ -42,7 +42,7 @@ void main() {
           .thenThrow(
         DioError(
           requestOptions: RequestOptions(path: ''),
-          type: DioErrorType.badResponse,
+          type: DioErrorType.response,
           response: Response(
             statusCode: 404,
             requestOptions: RequestOptions(path: ''),
@@ -57,7 +57,8 @@ void main() {
     });
 
     test('deve retornar unknownError caso dê um erro inesperado', () async {
-      when(() => dio.get('/products/5', queryParameters: {'populate': 'deep'})).thenThrow(Exception());
+      when(() => dio.get('/products/5', queryParameters: {'populate': 'deep'}))
+          .thenThrow(Exception());
 
       final result = await datasource.getProduct(5);
 

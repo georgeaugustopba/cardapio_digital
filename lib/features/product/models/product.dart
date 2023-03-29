@@ -6,6 +6,7 @@ class Product extends Equatable {
   const Product({
     required this.id,
     required this.title,
+    required this.quantity,
     required this.description,
     required this.originalBasePrice,
     required this.basePrice,
@@ -21,6 +22,7 @@ class Product extends Equatable {
       return Product(
         id: json['id'],
         title: attr['title'],
+        quantity: attr['quantity'],
         description: attr['description'],
         originalBasePrice: attr['originalBasePrice'],
         basePrice: attr['basePrice'],
@@ -40,6 +42,7 @@ class Product extends Equatable {
 
   final int id;
   final String title;
+  final int quantity;
   final String description;
   final num? originalBasePrice;
   final num basePrice;
@@ -55,7 +58,7 @@ class Product extends Equatable {
 
   @override
   String toString() {
-    return 'Product{id: $id, title: $title, basePrice: $basePrice, modifiers: $modifiers}';
+    return 'Product{id: $id, title: $title, basePrice: $basePrice, modifiers: $modifiers, quantity: $quantity}';
   }
 
   @override
@@ -68,5 +71,6 @@ class Product extends Equatable {
         imageUrl,
         category,
         modifiers,
+        quantity
       ];
 }

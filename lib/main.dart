@@ -22,7 +22,7 @@ class _MenuAppState extends State<MenuApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'T&A Confecções',
+      title: 'T&A Moda Feminina',
       color: ColorsTheme.kTextColor,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.menu.path,
@@ -42,20 +42,20 @@ class _MenuAppState extends State<MenuApp> {
       builder: limitWidth
           ? (context, child) {
               return ColoredBox(
-                color: ColorsTheme.kSecondaryColor.withOpacity(0.9),
+                color: ColorsTheme.kBackgroundColor.withOpacity(0.9),
                 child: Align(
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: 700),
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(boxShadow: [
+                    decoration: const BoxDecoration(boxShadow: [
                       BoxShadow(
-                        color: ColorsTheme.kPrimaryColor.withOpacity(0.4),
-                        offset: const Offset(4, 4),
+                        color: ColorsTheme.kPrimaryColor,
+                        offset: Offset(4, 4),
                         blurRadius: 10,
                       ),
                       BoxShadow(
-                        color: ColorsTheme.kPrimaryColor.withOpacity(0.4),
-                        offset: const Offset(-4, 4),
+                        color: ColorsTheme.kPrimaryColor,
+                        offset: Offset(-4, 4),
                         blurRadius: 10,
                       )
                     ]),

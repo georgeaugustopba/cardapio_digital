@@ -3,15 +3,22 @@ import 'package:flutter_menu/core/extensions/num_extension.dart';
 import 'package:flutter_menu/features/product/models/product.dart';
 
 class CreateOrderModel extends Equatable {
-  const CreateOrderModel(
-      {required this.products,
-      required this.userPhone,
-      required this.userName});
+  const CreateOrderModel({
+    required this.products,
+    required this.userPhone,
+    required this.userName,
+    required this.userCep,
+    required this.userRua,
+    this.userComplemento,
+  });
 
   //final String table;
   final List<Product> products;
   final String userName;
   final String userPhone;
+  final String userCep;
+  final String userRua;
+  final String? userComplemento;
 
   Map<String, dynamic> toJson() {
     return {
@@ -21,6 +28,9 @@ class CreateOrderModel extends Equatable {
           .truncateFixed(2),
       'clientName': userName,
       'clientPhone': userPhone,
+      'clientCep': userRua,
+      'clientRua': userRua,
+      'clientComplemento': userComplemento,
       'products': [
         for (final p in products)
           {
@@ -42,5 +52,5 @@ class CreateOrderModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [products, userName, userPhone];
+  List<Object?> get props => [products, userName, userPhone, userCep];
 }

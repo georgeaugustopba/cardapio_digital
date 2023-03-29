@@ -18,7 +18,7 @@ class HomeBottomBar extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: ColorsTheme.kSecondaryColor,
+        color: ColorsTheme.kTextColorWite,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[900]!,
@@ -68,14 +68,15 @@ class HomeBottomBar extends StatelessWidget {
                           children: const [
                             Icon(
                               Icons.home_outlined,
-                              color: Colors.white,
+                              color: ColorsTheme.kBackgroundColor,
                               size: 24,
                             ),
                             Text(
                               'Destaques',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: ColorsTheme.kBackgroundColor,
                                 fontSize: 12,
+                                fontWeight: FontWeight.bold,
                               ),
                             )
                           ],
@@ -101,14 +102,15 @@ class HomeBottomBar extends StatelessWidget {
                           children: const [
                             Icon(
                               Icons.menu,
-                              color: Colors.white,
+                              color: ColorsTheme.kBackgroundColor,
                               size: 24,
                             ),
                             Text(
                               'Catálogo ',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: ColorsTheme.kBackgroundColor,
                                 fontSize: 12,
+                                fontWeight: FontWeight.bold,
                               ),
                             )
                           ],

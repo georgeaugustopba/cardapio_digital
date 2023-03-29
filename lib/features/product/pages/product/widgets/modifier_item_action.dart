@@ -31,8 +31,8 @@ class ModifierItemAction extends StatelessWidget {
               child: Text(
                 '${modifier.countOption(item)}',
                 style: const TextStyle(
-                  color: ColorsTheme.kSecondaryColor,
-                ),
+                    color: ColorsTheme.kTextColorWite,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],

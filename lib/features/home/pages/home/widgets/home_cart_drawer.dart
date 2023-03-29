@@ -111,6 +111,14 @@ class HomeCartDrawer extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
+                      //     if (cartController.productCount < 1) ...[
+                      //       const SizedBox(height: 12),
+                      //       CoreTextButtom(
+                      //         ontap: () => Get.toNamed(AppRoutes.orders.path),
+                      //         color: ColorsTheme.kTextColorWite,
+                      //         title: 'Pedidos',
+                      //       ),
+                      //     ],
                       const SizedBox(height: 24),
                       if (cartController.productCount > 0) ...[
                         SizedBox(
@@ -124,7 +132,7 @@ class HomeCartDrawer extends StatelessWidget {
                             clipBehavior: Clip.antiAlias,
                             child: InkWell(
                               onTap: () {
-                                Get.toNamed(AppRoutes.checkout.path);
+                                Get.toNamed(AppRoutes.cart.path);
                               },
                               child: const Icon(
                                 Icons.arrow_forward_outlined,

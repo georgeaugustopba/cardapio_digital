@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_menu/features/auth/pages/Order/order_page.dart';
 import 'package:flutter_menu/features/auth/pages/auth/auth_page.dart';
+import 'package:flutter_menu/features/auth/pages/signup/signup_page.dart';
 import 'package:flutter_menu/features/auth/repositories/auth_repository.dart';
 import 'package:flutter_menu/features/cart/controllers/cart_controller.dart';
 import 'package:flutter_menu/features/cart/pages/cart/cart_page.dart';
+import 'package:flutter_menu/features/checkout/page/checkout_page.dart';
 import 'package:flutter_menu/features/dashboard/pages/dashboard/dashboard_page.dart';
 import 'package:flutter_menu/features/home/pages/home/home_page.dart';
 import 'package:flutter_menu/features/order/models/order.dart';
@@ -12,11 +15,13 @@ import 'package:get/get.dart';
 
 enum AppRoutes {
   menu('/menu'),
-  //scan('/'),
   products('/products/:pid'),
   auth('/auth'),
   dashboard('/dashboard'),
-  checkout('/checkout');
+  cart('/cart'),
+  checkout('/checkout'),
+  signup('/signup'),
+  orders('/orders');
 
   const AppRoutes(this.path);
 
@@ -24,14 +29,9 @@ enum AppRoutes {
 }
 
 final appPages = [
-  // GetPage(
-  //   name: AppRoutes.scan.path,
-  //   page: () => const ScanPage(),
-  //   middlewares: [TestMiddleware()],
-  // ),
   GetPage(
     name: AppRoutes.menu.path,
-    page: () => HomePage(table: Get.parameters['table']),
+    page: () => const HomePage(),
     middlewares: [TestMiddleware()],
   ),
   GetPage(
@@ -44,7 +44,7 @@ final appPages = [
     middlewares: [TestMiddleware()],
   ),
   GetPage(
-    name: AppRoutes.checkout.path,
+    name: AppRoutes.cart.path,
     page: () => const CartPage(),
     middlewares: [TestMiddleware()],
   ),
@@ -52,21 +52,38 @@ final appPages = [
     NotAuthenticatedMiddleware(),
   ]),
   GetPage(
-      name: AppRoutes.dashboard.path,
-      page: () => DashboardPage(
-          status: Get.parameters['status'] != null
-              ? OrderStatus.values.byName(Get.parameters['status']!)
-              : null),
-      middlewares: [
-        AuthenticatedMiddleware(),
-      ]),
+    name: AppRoutes.dashboard.path,
+    page: () => DashboardPage(
+        status: Get.parameters['status'] != null
+            ? OrderStatus.values.byName(Get.parameters['status']!)
+            : null),
+    middlewares: [
+      AuthenticatedMiddleware(),
+    ],
+  ),
+  GetPage(
+    name: AppRoutes.signup.path,
+    page: () => SignUpPage(),
+  ),
+  GetPage(
+    name: AppRoutes.checkout.path,
+    page: () => const CheckoutScreen(),
+  ),
+  GetPage(
+    name: AppRoutes.orders.path,
+    page: () => OrderPage(
+      status: Get.parameters['status'] != null
+          ? OrderStatus.values.byName(Get.parameters['status']!)
+          : null,
+    ),
+  ),
 ];
 
 class TestMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     final CartController cartController = Get.find();
-    if (route == AppRoutes.checkout.path && cartController.products.isEmpty) {
+    if (route == AppRoutes.cart.path && cartController.products.isEmpty) {
       return RouteSettings(name: AppRoutes.menu.path);
     }
     return null;
